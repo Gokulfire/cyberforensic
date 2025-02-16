@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-900 flex items-center justify-center h-screen">
+    <div class="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+        <h1 class="text-2xl font-bold text-green-400 mb-4">Congratulations!</h1>
+        <p id="flagMessage" class="text-lg text-white"></p>
+    </div>
+
+    <script>
+        // Encrypted flag message
+        const encryptedFlag = "4a8a08f09d37b73795649038408b5f33"; // md5 hash of "NICE TRY YOUR TEAM SELECT FOR FINAL!"
+
+        function decryptFlag(hash) {
+            // Simulate decryption using a secure method
+            if (hash === "4a8a08f09d37b73795649038408b5f33") {
+                return atob("TklDRSBUUllZT1VSIFRFQU0gU0VMRUNUIEZPUiBGSU5BTCENCg=="); // Base64 of "NICE TRY YOUR TEAM SELECT FOR FINAL!"
+            }
+            return "Flag not found";
+        }
+
+        // Display the decrypted flag
+        document.getElementById('flagMessage').innerText = decryptFlag(encryptedFlag);
+    </script>
+</body>
+</html>

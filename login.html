@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-900 flex items-center justify-center h-screen">
+    <div id="loginContainer" class="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold text-green-400 mb-4 text-center">Login</h1>
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label for="username" class="block text-sm font-medium text-white">Username</label>
+                <input type="text" id="username" name="username" class="w-full mt-1 p-2 rounded-lg bg-gray-700 text-white" required>
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-white">Password</label>
+                <input type="password" id="password" name="password" class="w-full mt-1 p-2 rounded-lg bg-gray-700 text-white" required>
+            </div>
+            <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg">Login</button>
+        </form>
+    </div>
+
+    <div id="flagContainer" class="hidden w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+        <h1 class="text-2xl font-bold text-green-400 mb-4">Congratulations!</h1>
+        <p id="flagMessage" class="text-white text-lg"></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            
+            const validUsernameHash = "9ba209c681444f59ba066be1f8f0bde7"; // ("cyber")
+            const validPasswordHash = "cd9d982e1e484acb05042fc695b69553"; // ("code")
+
+             
+            function md5(string) {
+                return CryptoJS.MD5(string).toString();
+            }
+
+            if (md5(username) === validUsernameHash && md5(password) === validPasswordHash) {
+                
+                document.getElementById('loginContainer').classList.add('hidden');
+
+                
+                document.getElementById('flagContainer').classList.remove('hidden');
+
+                
+                const encryptedFlag = "4e4943452054525920594f5552205445414d2053454c45435420464f522046494e414c21"; //
+                const flag = decryptFlag(encryptedFlag);
+                document.getElementById('flagMessage').innerText = flag;
+            } else {
+                alert('Invalid credentials');
+            }
+        });
+
+        
+        function decryptFlag(hex) {
+            const bytes = hex.match(/.{1,2}/g).map(byte => String.fromCharCode(parseInt(byte, 16)));
+            return bytes.join(""); 
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</body>
+</html>
